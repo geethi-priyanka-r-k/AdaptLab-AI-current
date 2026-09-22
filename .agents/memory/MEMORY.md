@@ -1,0 +1,1 @@
+- [API client TypeScript DOM libs](api-client-tsconfig.md) — generated browser clients need iterable DOM typings for Headers.entries().

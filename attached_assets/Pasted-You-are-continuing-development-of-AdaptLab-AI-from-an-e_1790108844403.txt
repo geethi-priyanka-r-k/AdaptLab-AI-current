@@ -1,0 +1,79 @@
+You are continuing development of AdaptLab AI from an existing GitHub repository.
+
+IMPORTANT:
+The previous AI/Agent session ran out of usage DURING PHASE 3.
+Therefore, PHASE 3 IS NOT COMPLETE.
+
+The current repository contains the partial implementation from the previous Phase 3 session.
+
+Do NOT assume Phase 3 is complete.
+Do NOT restart Phase 3 from scratch.
+Do NOT rewrite working Phase 1 or Phase 2 code.
+
+First inspect the CURRENT repository and determine exactly where Phase 3 stopped.
+
+Read:
+- ADAPTLAB-SPEC.md
+- CLAUDE.md
+
+Inspect all existing implementation before making changes.
+
+Check:
+
+1. Existing Phase 1 functionality
+2. Existing Phase 2 functionality
+3. Existing Phase 3 implementation
+4. Playwright setup and configuration
+5. worker/src/testing/
+6. worker/src/validators/
+7. Browser runner
+8. Environment/network profiles
+9. Device profiles
+10. Network signals
+11. Resource collection
+12. Image evidence collection
+13. JavaScript evidence collection
+14. Performance collection
+15. Evidence collection
+16. Test orchestrator
+17. Validation engine
+18. Test status handling
+19. Database migrations/schema
+20. test_signals
+21. test_resources
+22. test_metrics
+23. test_violations
+24. Test result UI
+25. Mock SUT / DEVELOPMENT mode
+26. URL validation and SSRF protection
+27. Automated tests
+28. Build/lint/test configuration
+
+Compare the current implementation against the complete Phase 3 requirements in ADAPTLAB-SPEC.md and the requirements provided for this Phase 3 task.
+
+Do NOT make changes yet.
+
+First give me a concise PHASE 3 STATUS REPORT containing:
+
+COMPLETED:
+- What is already correctly implemented
+
+PARTIALLY COMPLETED:
+- What exists but is incomplete
+
+MISSING:
+- What has not been implemented
+
+BROKEN:
+- Existing errors or functionality that does not work
+
+PHASE 3 REMAINING WORK:
+- Exact remaining tasks in implementation order
+
+Also identify anything that appears to have been implemented incorrectly and needs fixing.
+
+IMPORTANT:
+Do not start Phase 4.
+Do not implement Groq.
+Do not rebuild working Phase 1 or Phase 2.
+Do not make changes until the status report is provided.

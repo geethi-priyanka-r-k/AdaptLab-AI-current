@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "AdaptLab AI"
+description = "A developer testing and resilience platform foundation for managing external systems under test, project configuration, and future observability workflows."
+version = "1.0.0"
+id = "artifacts/adaptlab-ai"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20326
+
+[services.development]
+run = "pnpm --filter @workspace/adaptlab-ai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/adaptlab-ai", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/adaptlab-ai/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20326"
+BASE_PATH = "/"

@@ -1,0 +1,23 @@
+name = "adaptlab-ai-worker"
+main = "artifacts/api-server/src/worker.ts"
+compatibility_date = "2024-01-01"
+
+[vars]
+ENVIRONMENT = "production"
+
+# Secrets (set via: wrangler secret put <NAME>)
+# GROQ_API_KEY
+# SUPABASE_URL
+# SUPABASE_PUBLISHABLE_KEY
+# SUPABASE_SERVICE_ROLE_KEY
+
+[[routes]]
+pattern = "api/*"
+zone_name = "" # Set your Cloudflare zone name
+
+[build]
+command = "pnpm --filter @workspace/api-server run build"
+
+[build.upload]
+format = "modules"
+main = "./dist/index.mjs"

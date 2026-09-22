@@ -1,0 +1,240 @@
+You are continuing development of AdaptLab AI.
+
+Read:
+
+ADAPTLAB-SPEC.md
+CLAUDE.md
+
+Inspect the current repository before making changes.
+
+PHASE 1 already exists.
+
+Do NOT rebuild Phase 1.
+
+==================================================
+CURRENT TASK: PHASE 2
+==================================================
+
+Implement:
+
+PROJECT MANAGEMENT
++
+ADAPTIVE CONTRACT
++
+TEST CONFIGURATION
+
+Do NOT implement the actual Playwright execution engine yet.
+
+Do NOT implement Groq yet.
+
+==================================================
+PROJECT MANAGEMENT
+==================================================
+
+Complete project CRUD.
+
+Implement:
+
+POST /api/projects
+GET /api/projects
+GET /api/projects/:id
+PATCH /api/projects/:id
+DELETE /api/projects/:id
+
+Respect Supabase RLS and authenticated ownership.
+
+Frontend:
+
+/projects
+/projects/:id
+
+Allow:
+
+create
+edit
+view
+archive/delete where appropriate
+
+Every project represents an external SUT.
+
+==================================================
+SUT REGISTRATION
+==================================================
+
+The project must contain:
+
+name
+description
+application_type
+application_url
+
+Application types:
+
+ecommerce
+news
+
+Validate URLs.
+
+Do not execute arbitrary server-side requests to user URLs yet.
+
+==================================================
+ADAPTIVE CONTRACT
+==================================================
+
+Implement:
+
+/projects/:id/contract
+
+Create an Adaptive Contract builder.
+
+Support:
+
+LOW
+MEDIUM
+HIGH
+
+Each profile should define:
+
+network profile
+image policy
+javascript policy
+feature policy
+max resource size
+performance thresholds
+
+Example:
+
+LOW
+
+imagePolicy: low
+javascriptPolicy: minimal
+featurePolicy: reduced
+maxResourceSizeKb: 800
+maxLcpMs: 4000
+
+MEDIUM
+
+imagePolicy: medium
+javascriptPolicy: deferred
+featurePolicy: normal
+
+HIGH
+
+imagePolicy: high
+javascriptPolicy: full
+featurePolicy: full
+
+Do not hardcode these rules throughout the application.
+
+Store them in Supabase.
+
+==================================================
+TEST PROFILES
+==================================================
+
+Create reusable test profile configuration.
+
+Profiles:
+
+LOW
+MEDIUM
+HIGH
+
+The UI should clearly show what each profile means.
+
+==================================================
+TEST CONFIGURATION
+==================================================
+
+Create:
+
+/projects/:id/tests
+/projects/:id/tests/new
+
+Allow:
+
+profile selection
+testing method
+optional configuration
+
+Testing methods:
+
+adaptive_behavior
+performance
+resource
+full_validation
+
+Do not execute tests yet.
+
+Create test_run records with a status model such as:
+
+queued
+running
+passed
+violated
+failed
+cancelled
+
+==================================================
+UI
+==================================================
+
+Create professional forms.
+
+Use:
+
+clear validation
+help text
+tooltips
+status badges
+empty states
+confirmation dialogs
+
+Do not create fake test results.
+
+==================================================
+DATABASE
+==================================================
+
+Add/complete migrations for:
+
+adaptive_contracts
+test_profiles
+test_runs
+
+Add:
+
+foreign keys
+indexes
+timestamps
+ownership through project relationships
+RLS policies
+
+==================================================
+API
+==================================================
+
+Create clean service layers.
+
+Do not put database logic directly into React components.
+
+==================================================
+TESTING
+==================================================
+
+Add tests for:
+
+project CRUD
+contract validation
+test configuration validation
+authorization
+
+Run:
+
+build
+lint if configured
+tests
+
+Fix errors.
+
+STOP AFTER PHASE 2.

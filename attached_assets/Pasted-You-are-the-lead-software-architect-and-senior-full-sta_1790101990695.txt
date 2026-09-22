@@ -1,0 +1,413 @@
+You are the lead software architect and senior full-stack engineer for:
+
+ADAPTLAB AI
+Adaptive Web Testing & Resilience Lab
+
+Read ADAPTLAB-SPEC.md and CLAUDE.md before doing anything.
+
+==================================================
+CURRENT TASK: PHASE 1 ONLY
+==================================================
+
+Do NOT implement the entire product.
+
+Do NOT implement Playwright testing yet.
+
+Do NOT implement Groq yet.
+
+Do NOT implement regression analysis yet.
+
+Do NOT implement production deployment yet.
+
+Your responsibility is to build a clean, production-quality foundation.
+
+==================================================
+GOAL
+==================================================
+
+Create the initial AdaptLab AI developer platform foundation.
+
+The application must look like a professional developer testing/
+observability platform.
+
+It must NOT look like:
+
+- ChatGPT
+- Gemini
+- Claude
+- an AI chatbot
+- a generic AI dashboard
+- a template dashboard
+
+==================================================
+STACK
+==================================================
+
+Frontend:
+
+- React
+- Vite
+- JavaScript
+- Tailwind CSS
+- React Router
+
+Backend:
+
+- Cloudflare Workers
+- Hono
+
+Database/Auth:
+
+- Supabase
+- PostgreSQL
+- Supabase Auth
+- Row Level Security
+
+AI:
+
+- Groq will be added later.
+
+Testing:
+
+- Playwright will be added later.
+
+==================================================
+ARCHITECTURE
+==================================================
+
+Create:
+
+frontend/
+worker/
+supabase/
+tests/
+docs/
+
+Keep frontend and worker responsibilities clearly separated.
+
+Frontend:
+
+- UI
+- routing
+- auth UI
+- project UI
+- API client
+- reusable components
+
+Worker:
+
+- Hono API
+- server-side business logic
+- environment configuration
+- health endpoint
+
+Supabase:
+
+- migrations
+- schema
+- RLS
+
+==================================================
+FRONTEND ROUTES
+==================================================
+
+Create:
+
+/
+ /login
+ /signup
+ /dashboard
+ /projects
+ /projects/:id
+ /settings
+
+Protected routes must require authentication.
+
+==================================================
+AUTHENTICATION
+==================================================
+
+Implement Supabase Auth foundation:
+
+- signup
+- login
+- logout
+- session persistence
+- protected routes
+- auth-aware navigation
+
+Use:
+
+VITE_SUPABASE_URL
+VITE_SUPABASE_PUBLISHABLE_KEY
+
+Do not invent credentials.
+
+==================================================
+DATABASE
+==================================================
+
+Create the initial migration structure.
+
+Prepare tables:
+
+profiles
+projects
+project_settings
+adaptive_contracts
+test_profiles
+test_runs
+test_signals
+test_resources
+test_metrics
+test_violations
+ai_analysis
+test_comparisons
+
+For Phase 1, implement the foundation for:
+
+profiles
+projects
+project_settings
+
+Add appropriate:
+
+- UUID primary keys
+- foreign keys
+- timestamps
+- indexes
+- RLS
+
+Users must only access their own records.
+
+==================================================
+PROJECT MODEL
+==================================================
+
+A project represents an external System Under Test.
+
+It must support:
+
+name
+description
+application_type
+application_url
+owner_id
+status
+created_at
+updated_at
+
+Application types initially:
+
+ecommerce
+news
+
+The SUT is external.
+
+Do NOT put the e-commerce application's code inside AdaptLab.
+
+==================================================
+UI
+==================================================
+
+Create a distinctive professional design system.
+
+Design language:
+
+developer infrastructure
+testing platform
+observability
+engineering dashboard
+
+Use:
+
+- neutral/slate foundation
+- restrained blue primary
+- teal secondary
+- green success
+- amber warning
+- red violation
+- purple only for future AI insights
+
+Avoid:
+
+- excessive gradients
+- glassmorphism
+- neon effects
+- giant hero cards
+- chatbot UI
+
+Create reusable:
+
+Button
+Input
+Select
+Card
+Badge
+Modal
+Table
+EmptyState
+LoadingState
+ErrorState
+PageHeader
+StatusBadge
+Sidebar
+Topbar
+
+==================================================
+DASHBOARD
+==================================================
+
+Create the dashboard UI with realistic empty states.
+
+Show:
+
+Projects
+Test Runs
+Pass Rate
+Violations
+
+Since testing is not implemented yet, do NOT invent fake statistics.
+
+Display:
+
+"No test runs yet"
+
+instead of fabricated numbers.
+
+==================================================
+PROJECTS
+==================================================
+
+Create:
+
+Projects page
+
+Create Project modal/page
+
+Project details page
+
+Project card/table
+
+The Create Project form must contain:
+
+Project name
+Description
+Application type
+SUT URL
+
+Validate the URL.
+
+==================================================
+WORKER
+==================================================
+
+Create a Hono Worker.
+
+Implement:
+
+GET /api/health
+
+Return structured JSON.
+
+Prepare API architecture for future:
+
+/api/projects
+/api/tests
+/api/ai
+
+Do not implement test execution yet.
+
+==================================================
+ENVIRONMENT
+==================================================
+
+Create:
+
+.env.example
+
+Include placeholders for:
+
+VITE_SUPABASE_URL=
+VITE_SUPABASE_PUBLISHABLE_KEY=
+
+GROQ_API_KEY=
+GROQ_MODEL=
+
+Cloudflare/server variables should be documented without exposing secrets.
+
+==================================================
+SECURITY
+==================================================
+
+Never commit secrets.
+
+Create .gitignore.
+
+Never put:
+
+GROQ_API_KEY
+
+in frontend code.
+
+Never put:
+
+SUPABASE_SERVICE_ROLE_KEY
+
+in frontend code.
+
+==================================================
+TESTING
+==================================================
+
+Create basic tests for:
+
+- URL validation
+- project validation
+- auth route protection where practical
+
+Ensure:
+
+npm run build
+
+works.
+
+==================================================
+README
+==================================================
+
+Create a professional README containing:
+
+- overview
+- architecture
+- setup
+- environment variables
+- development commands
+- folder structure
+- current implementation status
+- future phases
+
+==================================================
+IMPORTANT
+==================================================
+
+Before changing files:
+
+1. Inspect the repository.
+2. Determine whether code already exists.
+3. Preserve useful existing work.
+4. Do not rewrite unnecessarily.
+
+After implementation:
+
+1. Run build.
+2. Run tests.
+3. Fix errors.
+4. Verify routing.
+5. Verify authentication flow.
+6. Verify database migration syntax.
+7. Summarize changes.
+
+STOP AFTER PHASE 1.
+
+Do NOT continue automatically into Phase 2.

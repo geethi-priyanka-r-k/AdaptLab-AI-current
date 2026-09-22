@@ -1,0 +1,381 @@
+You are continuing development of AdaptLab AI.
+
+Read:
+
+ADAPTLAB-SPEC.md
+CLAUDE.md
+
+Inspect all existing implementation before changing anything.
+
+Do NOT rewrite working Phase 1 or Phase 2 code.
+
+==================================================
+CURRENT TASK: PHASE 3
+==================================================
+
+Implement the REAL TESTING ENGINE.
+
+This is the core technical feature.
+
+Implement:
+
+Playwright
+browser execution
+SUT loading
+test conditions
+network/device/browser signals
+resource evidence
+performance evidence
+deterministic validation
+
+Do NOT implement Groq yet.
+
+==================================================
+IMPORTANT ARCHITECTURE
+==================================================
+
+The e-commerce application is an external System Under Test.
+
+AdaptLab does NOT implement its adaptive logic.
+
+AdaptLab:
+
+1. creates test conditions
+2. opens the SUT
+3. observes behavior
+4. collects evidence
+5. validates expected vs actual
+
+==================================================
+DEVELOPMENT MODE
+==================================================
+
+Create a clearly labeled mock SUT/test mode.
+
+This allows development before the teammate's e-commerce application is ready.
+
+The mock SUT must simulate:
+
+LOW
+MEDIUM
+HIGH
+
+adaptive responses.
+
+Clearly label it:
+
+DEVELOPMENT / MOCK SUT
+
+Never confuse mock results with real SUT results.
+
+==================================================
+TEST RUNNER
+==================================================
+
+Create a testing service.
+
+Input:
+
+project
+SUT URL
+test profile
+adaptive contract
+testing method
+
+Execution:
+
+1. initialize run
+2. launch browser
+3. apply environment
+4. navigate to SUT
+5. collect signals
+6. observe resources
+7. collect performance metrics
+8. collect evidence
+9. validate contract
+10. persist results
+11. update test status
+
+==================================================
+PLAYWRIGHT
+==================================================
+
+Use Playwright.
+
+Keep browser execution isolated from frontend code.
+
+Create:
+
+worker/src/testing/
+
+with clear services.
+
+Possible modules:
+
+browserRunner
+environmentProfiles
+networkSignals
+deviceSignals
+resourceCollector
+performanceCollector
+evidenceCollector
+testOrchestrator
+
+Improve names if needed.
+
+==================================================
+NETWORK
+==================================================
+
+Implement LOW/MEDIUM/HIGH network profiles.
+
+Use technically valid browser/network emulation mechanisms.
+
+Do not claim that a condition was applied unless the browser actually applied it.
+
+Persist:
+
+requested profile
+actual browser/network configuration
+detected signals
+
+==================================================
+DEVICE
+==================================================
+
+Support configurable device profiles.
+
+At minimum:
+
+desktop
+mobile
+
+Collect:
+
+viewport
+user agent
+device class
+hardware-related browser signals where available
+
+Do not invent unavailable signals.
+
+==================================================
+RESOURCE OBSERVATION
+==================================================
+
+Capture:
+
+URL
+resource type
+status
+content type
+transfer size where available
+encoded/body size where available
+duration
+initiator where available
+
+Special handling for:
+
+images
+JavaScript
+CSS
+
+==================================================
+IMAGE EVIDENCE
+==================================================
+
+Collect image information where possible:
+
+URL
+naturalWidth
+naturalHeight
+displayed dimensions
+resource size
+content type
+
+Do not assume image quality from filenames alone.
+
+Create a transparent heuristic/configurable policy for classifying image behavior.
+
+==================================================
+JAVASCRIPT EVIDENCE
+==================================================
+
+Collect:
+
+script URL
+transfer size
+duration
+loading timing
+
+Classify actual behavior using deterministic rules.
+
+==================================================
+PERFORMANCE
+==================================================
+
+Collect where available:
+
+FCP
+LCP
+CLS
+navigation timing
+resource count
+JavaScript transfer
+image transfer
+total transfer
+
+If a metric is unavailable, store null/unknown.
+
+Never invent values.
+
+==================================================
+VALIDATION ENGINE
+==================================================
+
+Create:
+
+worker/src/validators/
+
+The validator must be deterministic.
+
+Input:
+
+adaptive contract
+observed evidence
+performance metrics
+selected profile
+
+Output:
+
+status
+violations
+warnings
+evidence references
+
+Example:
+
+{
+  status: "violation",
+  violations: [
+    {
+      type: "IMAGE_POLICY_MISMATCH",
+      severity: "medium",
+      expected: "low",
+      actual: "high"
+    }
+  ]
+}
+
+Possible violations:
+
+IMAGE_POLICY_MISMATCH
+JAVASCRIPT_POLICY_MISMATCH
+FEATURE_POLICY_MISMATCH
+RESOURCE_SIZE_EXCEEDED
+LCP_THRESHOLD_EXCEEDED
+OTHER_PERFORMANCE_THRESHOLD
+
+Do not use AI for these decisions.
+
+==================================================
+DATABASE
+==================================================
+
+Persist:
+
+test_signals
+test_resources
+test_metrics
+test_violations
+
+Use proper foreign keys.
+
+==================================================
+TEST STATUS
+==================================================
+
+Implement:
+
+queued
+running
+passed
+violated
+failed
+cancelled
+
+The UI must reflect actual backend status.
+
+Do not fake progress.
+
+==================================================
+TEST RESULT UI
+==================================================
+
+Implement:
+
+/projects/:id/tests/:testId
+
+Show:
+
+test metadata
+profile
+status
+expected vs actual
+resource evidence
+performance metrics
+violations
+
+==================================================
+FAILURE HANDLING
+==================================================
+
+Handle:
+
+invalid URL
+SUT unavailable
+timeout
+browser failure
+navigation failure
+collection failure
+database failure
+
+A failed test must produce a useful failure record.
+
+==================================================
+SECURITY
+==================================================
+
+Treat SUT URLs as untrusted input.
+
+Implement URL validation.
+
+Prevent obvious SSRF risks.
+
+Do not allow access to internal/private network destinations unless explicitly designed and safely supported.
+
+Do not expose browser credentials or secrets.
+
+==================================================
+TESTING
+==================================================
+
+Create automated tests for:
+
+validation engine
+profile logic
+contract evaluation
+resource classification
+test result processing
+
+Create integration tests using the mock SUT.
+
+Run:
+
+build
+tests
+lint
+
+Fix errors.
+
+STOP AFTER PHASE 3.
