@@ -76,6 +76,11 @@ export default {
   },
 };
 
+interface ExecutionContext {
+  waitUntil(promise: Promise<unknown>): void;
+  passThroughOnException(): void;
+}
+
 interface Env {
   SUPABASE_URL: string;
   SUPABASE_PUBLISHABLE_KEY: string;
