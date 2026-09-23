@@ -454,7 +454,7 @@ function resultFromRows(
 class SupabaseWorkspaceStore implements WorkspaceStore {
   private readonly client: SupabaseRestClient;
 
-  constructor(user: StoreUser) {
+  constructor(private readonly user: StoreUser) {
     this.client = new SupabaseRestClient(user);
   }
 

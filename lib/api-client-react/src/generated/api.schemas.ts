@@ -252,6 +252,13 @@ export interface TestResult {
   }>;
   warnings: string[];
   error: string | null;
+  analysis: {
+    summary: string;
+    rootCause: string;
+    impact: string;
+    explanation: string;
+    recommendations: string[];
+  } | null;
   createdAt: string;
   updatedAt: string;
 }

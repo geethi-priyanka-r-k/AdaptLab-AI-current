@@ -15,15 +15,19 @@ type BrowserRunInput = {
 };
 
 async function applyNetworkConditions(context: BrowserContext, configuration: BrowserConfiguration) {
+  const { downloadThroughputBps, uploadThroughputBps, latencyMs } = configuration.network;
+  if (downloadThroughputBps == null || uploadThroughputBps == null || latencyMs == null) {
+    return false;
+  }
   try {
     const page = context.pages()[0] ?? (await context.newPage());
     const client = await context.newCDPSession(page);
     await client.send("Network.enable");
     await client.send("Network.emulateNetworkConditions", {
       offline: false,
-      downloadThroughput: configuration.network.downloadThroughputBps,
-      uploadThroughput: configuration.network.uploadThroughputBps,
-      latency: configuration.network.latencyMs,
+      downloadThroughput: downloadThroughputBps,
+      uploadThroughput: uploadThroughputBps,
+      latency: latencyMs,
     });
     return true;
   } catch {
