@@ -445,7 +445,10 @@ function resultFromRows(
     violations: violations.map((row) => json(row.evidence) as TestViolation),
     warnings: Array.isArray(signal.warnings) ? (signal.warnings as string[]) : [],
     error: typeof signal.error === "string" ? signal.error : null,
-    analysis: null,
+    analysis:
+      signal.analysis && typeof signal.analysis === "object"
+        ? (signal.analysis as TestResultRecord["analysis"])
+        : null,
     createdAt: dateValue(signal.created_at),
     updatedAt: dateValue(signal.updated_at),
   };

@@ -83,6 +83,13 @@ export const testSignalsTable = pgTable("test_signals", {
   detected: jsonb("detected").$type<Record<string, unknown>>().notNull(),
   warnings: jsonb("warnings").$type<string[]>().notNull(),
   error: text("error"),
+  analysis: jsonb("analysis").$type<{
+    summary: string;
+    rootCause: string;
+    impact: string;
+    explanation: string;
+    recommendations: string[];
+  }>(),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
 });
